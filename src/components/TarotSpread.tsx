@@ -29,7 +29,6 @@ export default function TarotSpread({ deck, active }: { deck: number[]; active: 
               rotate: offset * 9,
               scale: offset === 0 ? 1 : 0.78,
               opacity: 1,
-              filter: offset === 0 ? "brightness(1)" : "brightness(0.6)",
             }}
             exit={{ y: "-130%", opacity: 0, transition: { duration: 0.35, ease: "easeIn" } }}
             transition={{ type: "spring", stiffness: 90, damping: 15, delay: 0.1 + i * 0.12 }}
@@ -49,9 +48,16 @@ export default function TarotSpread({ deck, active }: { deck: number[]; active: 
                 <span className="tarot-sheen" aria-hidden="true" />
               </div>
               <div className="tarot-face tarot-back">
-                <img src="/img/tarot-back.jpg" alt="" draggable={false} />
+                <img src="/img/tarot-back.jpg" alt="" decoding="async" draggable={false} />
               </div>
             </motion.div>
+            <motion.span
+              className="tarot-dim"
+              aria-hidden="true"
+              initial={false}
+              animate={{ opacity: offset === 0 ? 0 : 0.42 }}
+              transition={{ duration: 0.5 }}
+            />
           </motion.div>
         );
       })}

@@ -1,0 +1,136 @@
+/* ---------- idle loops (compositor-driven) ---------- */
+
+.idle-puppet {
+  animation: idle-bob 1.4s ease-in-out 1.2s infinite alternate;
+}
+
+.idle-hang {
+  animation: idle-swing 2.2s ease-in-out 1.2s infinite alternate;
+}
+
+.idle-balloon {
+  animation: idle-float 2.6s ease-in-out 1.8s infinite alternate;
+}
+
+@keyframes idle-bob {
+  from {
+    transform: translateY(0) rotate(-1.2deg);
+  }
+  to {
+    transform: translateY(-7px) rotate(1.2deg);
+  }
+}
+
+@keyframes idle-swing {
+  from {
+    transform: rotate(-2.2deg);
+  }
+  to {
+    transform: rotate(2.2deg);
+  }
+}
+
+@keyframes idle-float {
+  from {
+    transform: translateY(-6px) rotate(-1.5deg);
+  }
+  to {
+    transform: translateY(6px) rotate(1.5deg);
+  }
+}
+
+.star-current {
+  animation: star-pulse 1.6s ease-in-out infinite;
+}
+
+@keyframes star-pulse {
+  0%,
+  100% {
+    opacity: 0.7;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+.tarot-dim {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  border-radius: 12px;
+  background: #000;
+  pointer-events: none;
+}
+
+/* ---------- lighter rendering on phones ---------- */
+
+@media (max-width: 600px), (pointer: coarse) {
+  :root {
+    --noise: none;
+  }
+
+  .hall::before,
+  .backdrop::after,
+  .spot,
+  .dust,
+  .sconce {
+    display: none;
+  }
+
+  .beam,
+  .footlights::before,
+  .floor::after,
+  .milkyway,
+  .god-rays,
+  .comet {
+    mix-blend-mode: normal;
+  }
+
+  .beam {
+    filter: none;
+    opacity: 0.55;
+    animation: none;
+  }
+
+  .god-rays {
+    animation: none;
+  }
+
+  .twinkle,
+  .bulb,
+  .skyline .window,
+  .head-sway {
+    animation: none;
+  }
+
+  .twinkle:nth-child(2n) {
+    display: none;
+  }
+
+  .petal:nth-of-type(2n) {
+    display: none;
+  }
+
+  .crest,
+  .valance,
+  .curtain,
+  .audience,
+  .banner,
+  .harlequin,
+  .glint,
+  .anime-clouds,
+  .cap-flow,
+  .lv-arrow path,
+  .star-glint path,
+  .starmap-anime .cap-line {
+    filter: none;
+  }
+
+  .banner {
+    box-shadow: none;
+  }
+
+  .starmap-anime .cap-line {
+    stroke-width: 2.8;
+  }
+}

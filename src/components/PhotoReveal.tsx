@@ -1,4 +1,4 @@
-import { motion, type TargetAndTransition, type Transition } from "framer-motion";
+import { motion, type TargetAndTransition } from "framer-motion";
 import type { Reveal } from "../slides";
 import { imageSizes } from "../imageSizes";
 
@@ -6,38 +6,25 @@ type Anim = {
   initial: TargetAndTransition;
   animate: TargetAndTransition;
   exit: TargetAndTransition;
-  idle?: TargetAndTransition;
-  idleTransition?: Transition;
 };
 
 const OUT = { duration: 0.38, ease: "easeIn" } as const;
-const loop = (duration: number): Transition => ({
-  duration,
-  repeat: Infinity,
-  repeatType: "mirror",
-  ease: "easeInOut",
-});
 
 const ANIMS: Record<Reveal, Anim> = {
   puppet: {
     initial: { y: "170%" },
     animate: { y: 0, transition: { type: "spring", stiffness: 110, damping: 12, delay: 0.15 } },
     exit: { y: "170%", transition: OUT },
-    idle: { y: [0, -7], rotate: [-1.2, 1.2] },
-    idleTransition: loop(1.4),
   },
   hang: {
     initial: { y: "-170%" },
     animate: { y: 0, transition: { type: "spring", stiffness: 80, damping: 10, delay: 0.1 } },
     exit: { y: "-170%", transition: OUT },
-    idle: { rotate: [-2.2, 2.2] },
-    idleTransition: loop(2.2),
   },
   spotlight: {
-    initial: { clipPath: "circle(0% at 50% 50%)", filter: "brightness(2.2)" },
+    initial: { clipPath: "circle(0% at 50% 50%)" },
     animate: {
       clipPath: "circle(75% at 50% 50%)",
-      filter: "brightness(1)",
       transition: { duration: 1.1, ease: [0.22, 1, 0.36, 1], delay: 0.35 },
     },
     exit: { clipPath: "circle(0% at 50% 50%)", transition: { duration: 0.4 } },
@@ -66,8 +53,6 @@ const ANIMS: Record<Reveal, Anim> = {
     initial: { y: "180%", rotate: 6 },
     animate: { y: 0, rotate: 0, transition: { duration: 1.8, ease: [0.16, 1, 0.3, 1] } },
     exit: { y: "-220%", transition: { duration: 0.6, ease: "easeIn" } },
-    idle: { y: [-6, 6], rotate: [-1.5, 1.5] },
-    idleTransition: loop(2.6),
   },
 };
 
@@ -77,6 +62,7 @@ export function Photo({ n }: { n: number }) {
     <img
       className="photo"
       src={`/img/${n}.jpg`}
+      decoding="async"
       width={w}
       height={h}
       style={{ "--r": w / h } as React.CSSProperties}
@@ -251,10 +237,10 @@ export default function PhotoReveal({ reveal, n, badge }: { reveal: Reveal; n: n
           transition={{ duration: 0.9 }}
         />
       )}
-      <motion.div className="reveal-idle" animate={a.idle} transition={a.idleTransition}>
+      <div className={`reveal-idle idle-${reveal}`}>
         <Framed reveal={reveal} n={n} />
         {badge && <span className="lv-badge lv-badge-ultra">{badge}</span>}
-      </motion.div>
+      </div>
     </motion.div>
   );
 }

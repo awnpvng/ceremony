@@ -1,5 +1,5 @@
 import { AnimatePresence, motion } from "framer-motion";
-import type { ReactNode } from "react";
+import { useLayoutEffect, useRef, useState, type ReactNode } from "react";
 import StarMap from "./StarMap";
 import AnimeSky from "./AnimeSky";
 
@@ -72,11 +72,49 @@ type Props = {
   children: ReactNode;
 };
 
+type Fit = { s: number; tx: number; ty: number };
+
+function useOverviewFit(ref: React.RefObject<HTMLDivElement | null>) {
+  const [fit, setFit] = useState<Fit | null>(null);
+  useLayoutEffect(() => {
+    const measure = () => {
+      const el = ref.current;
+      if (!el) return;
+      const w = el.offsetWidth;
+      const h = el.offsetHeight;
+      const vw = window.innerWidth;
+      const topSpace = 24;
+      const availH = window.innerHeight - topSpace - 88;
+      const s = Math.min(Math.min(vw * 0.94, 1100) / w, availH / h);
+      setFit({ s, tx: (vw - s * w) / 2, ty: topSpace + (availH - s * h) / 2 - el.offsetTop });
+    };
+    measure();
+    window.addEventListener("resize", measure);
+    return () => window.removeEventListener("resize", measure);
+  }, [ref]);
+  return fit;
+}
+
 export default function Theater({ open, started, zoomed, lit, formation, label, children }: Props) {
   const t = { duration: OPEN_MS / 1000, ease: EASE };
+  const boothRef = useRef<HTMLDivElement>(null);
+  const fit = useOverviewFit(boothRef);
+  const [ready, setReady] = useState(false);
+
+  useLayoutEffect(() => {
+    if (!fit || ready) return;
+    const id = requestAnimationFrame(() => setReady(true));
+    return () => cancelAnimationFrame(id);
+  }, [fit, ready]);
+
+  const transform = zoomed || !fit ? "none" : `translate(${fit.tx}px, ${fit.ty}px) scale(${fit.s})`;
 
   return (
-    <div className={`booth ${zoomed ? "booth-zoomed" : ""}`}>
+    <div
+      ref={boothRef}
+      className={`booth ${ready ? "booth-ready" : ""}`}
+      style={{ transform, visibility: fit ? "visible" : "hidden" }}
+    >
       <Crest />
       <div className="proscenium">
         <div className="stage">

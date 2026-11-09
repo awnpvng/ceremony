@@ -160,11 +160,12 @@ export default function StarMap({ lit, formation, label }: Props) {
               transition={{ duration: 1.5, ease: [0.65, 0, 0.35, 1], delay: formation ? i * 0.05 : 0 }}
             >
               <motion.circle
+                className={current ? "star-current" : undefined}
                 r={on ? (current ? 22 : 13) : 0}
                 fill="url(#starGlow)"
                 initial={false}
-                animate={{ opacity: on ? (current ? [0.7, 1, 0.7] : 0.8) : 0 }}
-                transition={current ? { duration: 1.6, repeat: Infinity } : { duration: 0.6 }}
+                animate={{ opacity: on ? 0.85 : 0 }}
+                transition={{ duration: 0.6 }}
               />
               <motion.path
                 d="M0 -7 L1.6 -1.6 L7 0 L1.6 1.6 L0 7 L-1.6 1.6 L-7 0 L-1.6 -1.6 Z"

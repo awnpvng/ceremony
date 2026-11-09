@@ -10,6 +10,7 @@ import ProgressDots from "./components/ProgressDots";
 import InviteCard, { GOLD_CONFETTI } from "./components/InviteCard";
 import "./App.css";
 import "./scenes.css";
+import "./perf.css";
 
 const ROMAN = ["I", "II", "III", "IV", "V", "VI", "VII", "VIII", "IX", "X", "XI", "XII", "XIII", "XIV", "XV"];
 
@@ -72,7 +73,11 @@ function App() {
 
   useEffect(() => {
     for (const s of steps.slice(stepIndex + 1, stepIndex + 4)) {
-      if (s.image) new Image().src = `/img/${s.image}.jpg`;
+      for (const n of s.images ?? (s.image ? [s.image] : [])) {
+        const img = new Image();
+        img.src = `/img/${n}.jpg`;
+        img.decode().catch(() => {});
+      }
     }
   }, [stepIndex]);
 
@@ -108,6 +113,7 @@ function App() {
 
   const isLast = started && stepIndex === total - 1;
   const zoomed = started && stepIndex > 0;
+
   const chaptersDone = slides.slice(0, step.slide + 1).filter((s) => s.kind === "story").length;
   const finale = slide.kind === "transition" || slide.kind === "invite";
   const lit = finale ? chapterCount : chaptersDone;
