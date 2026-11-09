@@ -1,0 +1,543 @@
+/* ---------- together layouts ---------- */
+
+.group {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4cqw;
+  width: 100%;
+  height: 100%;
+}
+
+.group .reveal {
+  --pw: 38cqw;
+  --ph: 58cqh;
+}
+
+.group-wings .gilt {
+  padding: 1.8cqh;
+}
+
+.group-levelup {
+  position: relative;
+  gap: 2cqw;
+}
+
+.lv-before {
+  --ph: 44cqh;
+  align-self: flex-end;
+  margin-bottom: 4cqh;
+}
+
+.lv-after {
+  --ph: 58cqh;
+  align-self: flex-start;
+  margin-top: 2cqh;
+}
+
+.lv-badge {
+  position: absolute;
+  top: -1.6cqh;
+  left: -1.6cqh;
+  z-index: 2;
+  padding: 0.5cqh 1.4cqh;
+  border-radius: 8px;
+  font-family: "Be Vietnam Pro", sans-serif;
+  font-weight: 800;
+  font-size: clamp(0.8rem, 3.4cqh, 1.4rem);
+  color: #fff;
+  background: linear-gradient(180deg, #6b7a99, #3a4560);
+  border: 2px solid #fff;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.45);
+  rotate: -8deg;
+}
+
+.lv-badge-max {
+  background: linear-gradient(180deg, #ffd56b, #e08a1a);
+  color: #3b1a10;
+}
+
+.lv-badge-ultra {
+  top: -2.4cqh;
+  left: 50%;
+  translate: -50% 0;
+  white-space: nowrap;
+  background: linear-gradient(135deg, #ff5fa2, #b65cff 55%, #5bc8ff);
+  color: #fff;
+  font-size: clamp(0.9rem, 4cqh, 1.6rem);
+  box-shadow: 0 0 16px rgba(255, 95, 162, 0.7), 0 4px 10px rgba(0, 0, 0, 0.45);
+}
+
+.reveal-idle {
+  position: relative;
+}
+
+.lv-burst {
+  position: absolute;
+  bottom: -2.5cqh;
+  right: -3cqh;
+  z-index: 3;
+  padding: 0.6cqh 1.6cqh;
+  font-family: "Be Vietnam Pro", sans-serif;
+  font-style: italic;
+  font-weight: 800;
+  font-size: clamp(0.9rem, min(4.4cqh, 5.4cqw), 1.8rem);
+  letter-spacing: 0.04em;
+  white-space: nowrap;
+  color: #fff;
+  background: linear-gradient(90deg, #d6337f, #5b3fd9);
+  border-radius: 6px;
+  box-shadow: 0 0 18px rgba(255, 95, 162, 0.7);
+  rotate: -6deg;
+}
+
+.lv-arrow {
+  width: min(12cqw, 18cqh);
+  align-self: center;
+  overflow: visible;
+}
+
+.lv-arrow path {
+  fill: none;
+  stroke: var(--gold-hi);
+  stroke-width: 6;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  filter: drop-shadow(0 0 6px rgba(255, 220, 140, 0.9));
+}
+
+/* ---------- tarot ---------- */
+
+.tarot {
+  position: relative;
+  display: grid;
+  place-items: center;
+  width: 100%;
+  height: 100%;
+  --card-w: min(44cqw, 41cqh);
+}
+
+.tarot-card {
+  grid-area: 1 / 1;
+  width: var(--card-w);
+  aspect-ratio: 0.624;
+  perspective: 1400px;
+}
+
+.tarot-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transform-style: preserve-3d;
+}
+
+.tarot-face {
+  position: absolute;
+  inset: 0;
+  border-radius: 12px;
+  backface-visibility: hidden;
+  overflow: hidden;
+  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.6);
+}
+
+.tarot-front {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 7% 8% 6%;
+  background:
+    radial-gradient(ellipse at 50% 0%, rgba(201, 176, 112, 0.18), transparent 60%),
+    #0d0c0a;
+  border: 2px solid #b39a5f;
+  outline: 1px solid rgba(179, 154, 95, 0.6);
+  outline-offset: -8px;
+  color: #d9c38c;
+  font-family: var(--serif);
+}
+
+.tarot-no {
+  font-size: clamp(0.8rem, 2.6cqh, 1.15rem);
+  letter-spacing: 0.25em;
+  margin-bottom: 3%;
+}
+
+.tarot-window {
+  position: relative;
+  flex: 1;
+  width: 100%;
+  min-height: 0;
+  border: 1.5px solid #b39a5f;
+  border-radius: 46% 46% 4px 4px / 22% 22% 4px 4px;
+  overflow: hidden;
+}
+
+.tarot-window img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.tarot-name {
+  margin-top: 4%;
+  font-size: clamp(0.8rem, min(3.2cqh, 4.6cqw), 1.4rem);
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  white-space: nowrap;
+  text-transform: uppercase;
+}
+
+.tarot-sheen {
+  position: absolute;
+  inset: -50%;
+  pointer-events: none;
+  background: linear-gradient(115deg, transparent 40%, rgba(255, 255, 255, 0.28) 48%, rgba(180, 220, 255, 0.18) 52%, transparent 60%);
+  translate: -60% 0;
+}
+
+.is-active .tarot-sheen {
+  animation: sheen 3.6s ease-in-out 1.6s infinite;
+}
+
+@keyframes sheen {
+  0% {
+    translate: -60% 0;
+  }
+  45%,
+  100% {
+    translate: 60% 0;
+  }
+}
+
+.tarot-back {
+  transform: rotateY(180deg);
+  background: #0d0c0a;
+}
+
+.tarot-back img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.is-active .tarot-face {
+  box-shadow:
+    0 0 40px rgba(230, 200, 130, 0.45),
+    0 18px 40px rgba(0, 0, 0, 0.6);
+}
+
+@container (max-aspect-ratio: 4 / 5) {
+  .tarot {
+    --card-w: min(54cqw, 40cqh);
+  }
+
+  .group-wings {
+    flex-direction: column;
+    gap: 2cqh;
+  }
+
+  .group-wings .reveal {
+    --pw: 70cqw;
+    --ph: 30cqh;
+  }
+
+  .group-levelup {
+    flex-direction: column;
+    gap: 1cqh;
+  }
+
+  .lv-before {
+    --pw: 58cqw;
+    --ph: 26cqh;
+    align-self: center;
+    margin: 0;
+    translate: -14% 0;
+  }
+
+  .lv-after {
+    --pw: 64cqw;
+    --ph: 34cqh;
+    align-self: center;
+    margin: 0;
+    translate: 14% 0;
+  }
+
+  .lv-arrow {
+    width: 10cqh;
+    rotate: 20deg;
+    margin: -4cqh 0;
+  }
+}
+
+/* ---------- anime finale ---------- */
+
+.anime-sky {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+}
+
+.anime-gradient {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, #060a2e 0%, #15185a 24%, #3d2c8a 46%, #9a4c9f 64%, #ec7c95 80%, #ffc38f 93%);
+}
+
+.god-rays {
+  position: absolute;
+  inset: -20% -20% 20%;
+  background: repeating-conic-gradient(from 0deg at 50% 0%, rgba(255, 255, 255, 0.07) 0 3deg, transparent 3deg 11deg);
+  -webkit-mask-image: radial-gradient(ellipse 60% 80% at 50% 0%, #000, transparent 75%);
+  mask-image: radial-gradient(ellipse 60% 80% at 50% 0%, #000, transparent 75%);
+  mix-blend-mode: screen;
+  animation: rays 14s ease-in-out infinite alternate;
+}
+
+@keyframes rays {
+  to {
+    rotate: 6deg;
+  }
+}
+
+.milkyway {
+  position: absolute;
+  inset: -30%;
+  rotate: -28deg;
+  background:
+    radial-gradient(1.2px 1.2px at 12px 18px, #fff, transparent),
+    radial-gradient(1px 1px at 44px 70px, #fff, transparent),
+    radial-gradient(1.4px 1.4px at 90px 30px, #e8f4ff, transparent),
+    radial-gradient(1px 1px at 120px 96px, #fff, transparent),
+    radial-gradient(1px 1px at 70px 120px, #ffe6f5, transparent),
+    radial-gradient(1.3px 1.3px at 150px 50px, #fff, transparent),
+    radial-gradient(ellipse 12% 50% at 50% 50%, rgba(200, 185, 255, 0.4), transparent 70%);
+  background-size: 170px 140px, 170px 140px, 170px 140px, 170px 140px, 170px 140px, 170px 140px, 100% 100%;
+  -webkit-mask-image: radial-gradient(ellipse 16% 55% at 50% 50%, #000 25%, transparent 75%);
+  mask-image: radial-gradient(ellipse 16% 55% at 50% 50%, #000 25%, transparent 75%);
+  mix-blend-mode: screen;
+}
+
+.comet {
+  position: absolute;
+  height: 4px;
+  border-radius: 999px;
+  transform-origin: 0 50%;
+  mix-blend-mode: screen;
+  animation: comet-drift 16s ease-in-out infinite alternate;
+}
+
+.comet::before {
+  content: "";
+  position: absolute;
+  left: -6px;
+  top: 50%;
+  width: 12px;
+  height: 12px;
+  translate: 0 -50%;
+  border-radius: 50%;
+  background: #fff;
+  box-shadow: 0 0 14px 6px rgba(160, 230, 255, 0.95), 0 0 40px 16px rgba(255, 150, 220, 0.5);
+}
+
+.comet-main {
+  left: 72%;
+  top: 62%;
+  width: 26%;
+  rotate: -38deg;
+  background: linear-gradient(90deg, #fff, rgba(150, 225, 255, 0.85) 12%, rgba(255, 150, 215, 0.4) 50%, transparent);
+  filter: drop-shadow(0 0 6px rgba(170, 230, 255, 0.9));
+}
+
+.comet-split {
+  left: 73.5%;
+  top: 63%;
+  width: 18%;
+  height: 2px;
+  rotate: -28deg;
+  background: linear-gradient(90deg, #fff, rgba(255, 160, 220, 0.7) 20%, transparent);
+  animation-delay: -4s;
+}
+
+.comet-split::before {
+  width: 7px;
+  height: 7px;
+}
+
+@keyframes comet-drift {
+  to {
+    translate: -24px 14px;
+  }
+}
+
+.glint {
+  position: absolute;
+  width: clamp(14px, 2.2vw, 26px);
+  height: clamp(14px, 2.2vw, 26px);
+  translate: -50% -50%;
+  fill: #fff;
+  filter: drop-shadow(0 0 4px #9fe6ff) drop-shadow(0 0 10px #ff9fd8);
+  animation: kira 3.6s ease-in-out infinite;
+}
+
+@keyframes kira {
+  0%,
+  100% {
+    transform: scale(0.2) rotate(0deg);
+    opacity: 0;
+  }
+  45% {
+    transform: scale(1) rotate(45deg);
+    opacity: 1;
+  }
+  70% {
+    transform: scale(0.4) rotate(90deg);
+    opacity: 0.4;
+  }
+}
+
+.anime-clouds {
+  position: absolute;
+  left: -2%;
+  bottom: 6%;
+  width: 104%;
+  height: 34%;
+  filter: drop-shadow(0 -2px 6px rgba(255, 190, 200, 0.5));
+}
+
+.petal {
+  position: absolute;
+  top: -4%;
+  width: 11px;
+  height: 8px;
+  border-radius: 80% 0 80% 0;
+  background: linear-gradient(135deg, #fff0f6, #ff9ec7);
+  box-shadow: 0 0 4px rgba(255, 190, 220, 0.8);
+  opacity: 0.9;
+  animation: petal-fall 9s linear infinite;
+}
+
+@keyframes petal-fall {
+  0% {
+    transform: translate(0, 0) rotate(0deg);
+  }
+  50% {
+    transform: translate(40px, 50vh) rotate(220deg);
+  }
+  100% {
+    transform: translate(-20px, 105vh) rotate(480deg);
+  }
+}
+
+.starmap-anime .cap-line {
+  stroke: url(#animeLine);
+  stroke-width: 2.4;
+  filter: drop-shadow(0 0 3px #bdf0ff) drop-shadow(0 0 10px rgba(255, 140, 210, 0.9));
+}
+
+.cap-flow {
+  fill: none;
+  stroke: #fff;
+  stroke-width: 3;
+  stroke-linecap: round;
+  stroke-dasharray: 0.12 0.88;
+  stroke-dashoffset: 1;
+  opacity: 0;
+  filter: drop-shadow(0 0 6px #fff) drop-shadow(0 0 12px #8fe3ff);
+  animation: flow 2.4s linear infinite;
+}
+
+@keyframes flow {
+  0% {
+    stroke-dashoffset: 1;
+    opacity: 1;
+  }
+  100% {
+    stroke-dashoffset: 0;
+    opacity: 1;
+  }
+}
+
+.star-burst {
+  fill: none;
+  stroke: #bdf0ff;
+  stroke-width: 2;
+}
+
+.star-glint {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: glint-spin 3s ease-in-out infinite;
+}
+
+.star-glint path {
+  stroke: #fff;
+  stroke-width: 1.2;
+  stroke-linecap: round;
+  opacity: 0.85;
+  filter: drop-shadow(0 0 4px #9fe6ff);
+}
+
+@keyframes glint-spin {
+  0%,
+  100% {
+    transform: scale(0.5) rotate(0deg);
+    opacity: 0.4;
+  }
+  50% {
+    transform: scale(1) rotate(45deg);
+    opacity: 1;
+  }
+}
+
+.starmap-anime .constellation-label {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  font-family: "Be Vietnam Pro", sans-serif;
+  font-style: normal;
+  font-weight: 800;
+  color: #fff;
+  letter-spacing: 0.14em;
+  text-shadow: 0 0 6px #8fe3ff, 0 0 18px rgba(255, 130, 210, 0.9);
+}
+
+.scene .anime-title {
+  font-family: var(--serif);
+  font-style: italic;
+  background: none;
+  color: #fff;
+  -webkit-text-stroke: 1px rgba(255, 255, 255, 0.4);
+  text-shadow:
+    0 0 10px rgba(143, 227, 255, 0.9),
+    0 0 28px rgba(255, 130, 210, 0.8),
+    0 4px 12px rgba(40, 10, 60, 0.8);
+}
+
+.scene-invite .invite-headline {
+  padding: 4px 14px;
+  border-radius: 12px;
+  background: radial-gradient(ellipse at 50% 50%, rgba(12, 8, 44, 0.7), rgba(12, 8, 44, 0.35) 70%, transparent);
+  color: #fff;
+  text-shadow: 0 0 10px rgba(143, 227, 255, 0.9), 0 0 24px rgba(255, 130, 210, 0.8);
+}
+
+/* ---------- reduced motion ---------- */
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+
+  .petal,
+  .shooting-star,
+  .dust,
+  .cap-flow {
+    display: none;
+  }
+}
