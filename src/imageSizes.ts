@@ -30,4 +30,5 @@ export const imageSizes: Record<number, [number, number]> = {
   33: [900, 1600],
   34: [900, 1600],
   35: [900, 1600],
+  36: [1600, 1200],
 };

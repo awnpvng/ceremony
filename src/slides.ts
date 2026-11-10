@@ -85,7 +85,7 @@ export const slides: Slide[] = [
     id: "s10",
     kind: "story",
     text: "Mỗi nơi lại kết nạp thêm giang hồ",
-    images: [20, 23, 28, 30, 32],
+    images: [20, 23, 28, 30, 32, 36],
     sticker: "😎",
   },
   {
